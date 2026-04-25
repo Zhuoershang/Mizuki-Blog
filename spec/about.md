@@ -1,49 +1,12 @@
+拾光小记：为何我用博客收藏生活
+记忆像散落的珍珠，每一个瞬间都闪烁着独特的光芒。清晨咖啡的香气，路边孩童的笑声，傍晚天空渐变的色彩——这些看似微不足道的片段，却是构成生命质地的真实纹理。它们转瞬即逝，若不及时拾取，便会被时光的洪流冲散，再无踪迹。
 
-This website is built with the **Astro** framework using the [Mizuki](https://github.com/matsuzaka-yuki/mizuki) theme.
+起初，我尝试用相机捕捉这些时刻。但镜头定格的只是表象，无法记录当时内心的波动。后来我开始在博客上写下这些瞬间：母亲电话里熟悉的唠叨，朋友聚会时的畅快大笑，甚至独自散步时的胡思乱想。这些文字不求华美，只为真实。写作过程中，那些模糊的感受变得清晰，平淡的日常显露出深意。
 
-::github{repo="matsuzaka-yuki/Mizuki"}
+博客像一座私人花园，我在其中种下记忆的种子。有时是完整的叙事，更多时候只是零星的片段——一个触动心弦的场景，一句萦绕耳畔的话语，一种想要留住的情绪。不必担心这些记录是否足够精彩，因为生活的价值从不在于戏剧性，而在于我们如何感知和体验。
 
-## 🌟 Theme Features
+当时间流逝，重读这些文字，那些以为遗忘的细节重新鲜活起来。我看到自己如何在琐碎中寻找意义，在平凡中发现美好。博客不仅记录了生活，更映照出内心成长的轨迹。
 
-### 🎨 Design & User Experience
-- **Modern & Elegant Design** - Clean, minimalist interface with beautiful typography
-- **Fully Responsive** - Optimized for all devices from mobile to desktop
-- **Dark/Light Mode** - Automatic theme switching with smooth transitions
-- **Beautiful Typography** - Enhanced readability with JetBrains Mono font
-- **Smooth Animations** - Fluid page transitions and interactive elements
+或许，这就是记录的魔力——让我们在匆忙的世界里，为易逝的美好建造一个永恒的栖身之所。每一个认真记录的日子，都是对生命温柔的致敬。
 
-### 🔍 Content & Search
-- **Advanced Search** - Powered by [Pagefind](https://pagefind.app/) for fast, accurate results
-- **Enhanced Markdown** - Extended syntax with code highlighting and math support
-- **Interactive Table of Contents** - Auto-scroll navigation for long articles
-- **RSS Feed Generation** - Stay updated with automatic feed generation
-- **Reading Time Estimation** - Know how long articles take to read
-- **Post Categorization** - Organize content with tags and categories
-
-
-
-### 📱 Special Pages
-- **Anime Tracking Page** - Track your anime watching progress with ratings
-- **Friends Links Page** - Showcase friend websites with beautiful cards
-- **Diary/Moments Page** - Share life moments like social media posts
-- **Archive Page** - Organized timeline view of all posts
-- **About Page** - Customizable personal introduction (this page!)
-
-### 🛠 Technical Features
-- **Enhanced Code Blocks** - Powered by [Expressive Code](https://expressive-code.com/)
-- **Math Support** - LaTeX rendering with KaTeX for mathematical expressions
-- **Image Optimization** - PhotoSwipe gallery with lazy loading
-- **SEO Optimized** - Built-in sitemap and meta tags for better search visibility
-- **Performance Optimized** - Fast loading with caching and optimization
-- **Comment System Ready** - Integration support for Twikoo comments
-
-### 🎯 Advanced Markdown Features
-- **Callouts & Admonitions** - Beautiful info boxes with `> [!NOTE]`, `> [!TIP]`, `> [!WARNING]`
-- **Mathematical Equations** - Write LaTeX math with `$inline$` and `$$block$$` syntax
-- **GitHub Cards** - Embed repository cards with `::github{repo="user/repo"}`
-- **Syntax Highlighting** - Advanced code highlighting with line numbers
-- **Copy Code Buttons** - Easy code copying functionality
-
----
-
-*Built with ❤️ using Astro and inspired by modern web design principles.*
+卓尔伤.
