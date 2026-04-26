@@ -19,10 +19,10 @@ export const devicesData: DeviceCategory = {
 	VIVO: [
 		{
 			name: "VIVO X90 PRO+",
-			image: "/images/device/vivo-x90-pro-plus.png",
+			image: "/images/device/vivo-x90-pro-plus.jpg",
 			specs: "Black / 16GB + 512GB",
 			description: "Flagship smartphone with MediaTek Dimensity 9200+ processor, 50MP quad-camera system with Zeiss optics, 6.78-inch AMOLED display, 4700mAh battery with 80W fast charging.",
-			link: "https://www.vivo.com.cn/vivo-x90-pro-plus",
+			link: "https://www.vivo.com/vivo/param/x90pro/",
 		},
 	],
 	Router: [
