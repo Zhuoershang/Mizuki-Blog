@@ -1,0 +1,1953 @@
+{
+  "type": "doc",
+  "content": [
+    {
+      "type": "heading",
+      "attrs": {
+        "id": "飞牛os设置ssl证书脚本指南-deepseek",
+        "data-toc-id": "飞牛os设置ssl证书脚本指南-deepseek",
+        "level": 1
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "飞牛OS设置SSL证书脚本指南-DeepSeek"
+        }
+      ]
+    },
+    {
+      "type": "horizontalRule"
+    },
+    {
+      "type": "bulletList",
+      "content": [
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "DeepSeek"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "marks": [
+                    {
+                      "type": "link",
+                      "attrs": {
+                        "href": "https://chat.deepseek.com/a/chat/s/78d47f0a-e172-4073-8618-279c6594b28f",
+                        "target": "_blank",
+                        "rel": "noopener noreferrer nofollow",
+                        "class": "",
+                        "title": null
+                      }
+                    }
+                  ],
+                  "text": "https://chat.deepseek.com/a/chat/s/78d47f0a-e172-4073-8618-279c6594b28f"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Chat with DeepSeek AI."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "2025-11-26 17:56"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "horizontalRule"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "飞牛os，使用脚本设置ssl证书"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "id": "在飞牛os上使用脚本设置ssl证书",
+        "data-toc-id": "在飞牛os上使用脚本设置ssl证书",
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "在飞牛OS上使用脚本设置SSL证书"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "要在飞牛OS上设置SSL证书，您可以使用脚本来自动化这个过程。以下是几种可能的方法："
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "id": "方法一使用acmesh自动获取并安装证书",
+        "data-toc-id": "方法一使用acmesh自动获取并安装证书",
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "方法一：使用acme.sh自动获取并安装证书"
+        }
+      ]
+    },
+    {
+      "type": "codeBlock",
+      "attrs": {
+        "language": null,
+        "highlightedHtml": "<pre class=\"shiki shiki-themes vitesse-light vitesse-dark\" style=\"background-color:#ffffff;--shiki-dark-bg:#18181b;color:#393a34;--shiki-dark:#dbd7caee\" tabindex=\"0\"><code><span class=\"line\"><span>#!/bin/bash</span></span>\n<span class=\"line\"><span></span></span>\n<span class=\"line\"><span></span></span>\n<span class=\"line\"><span>curl https://get.acme.sh | sh</span></span>\n<span class=\"line\"><span>source ~/.bashrc</span></span>\n<span class=\"line\"><span></span></span>\n<span class=\"line\"><span></span></span>\n<span class=\"line\"><span>acme.sh --issue -d yourdomain.com --dns dns_cf \\</span></span>\n<span class=\"line\"><span>  --keylength ec-256  </span></span>\n<span class=\"line\"><span></span></span>\n<span class=\"line\"><span></span></span>\n<span class=\"line\"><span>acme.sh --install-cert -d yourdomain.com \\</span></span>\n<span class=\"line\"><span>  --ecc \\</span></span>\n<span class=\"line\"><span>  --key-file /path/to/key.pem \\</span></span>\n<span class=\"line\"><span>  --fullchain-file /path/to/cert.pem \\</span></span>\n<span class=\"line\"><span>  --reloadcmd \"systemctl restart nginx\"</span></span></code></pre>"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "#!/bin/bash\n\n\ncurl https://get.acme.sh | sh\nsource ~/.bashrc\n\n\nacme.sh --issue -d yourdomain.com --dns dns_cf \\\n  --keylength ec-256  \n\n\nacme.sh --install-cert -d yourdomain.com \\\n  --ecc \\\n  --key-file /path/to/key.pem \\\n  --fullchain-file /path/to/cert.pem \\\n  --reloadcmd \"systemctl restart nginx\"\n"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "id": "方法二手动证书安装脚本",
+        "data-toc-id": "方法二手动证书安装脚本",
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "方法二：手动证书安装脚本"
+        }
+      ]
+    },
+    {
+      "type": "codeBlock",
+      "attrs": {
+        "language": null,
+        "highlightedHtml": "<pre class=\"shiki shiki-themes vitesse-light vitesse-dark\" style=\"background-color:#ffffff;--shiki-dark-bg:#18181b;color:#393a34;--shiki-dark:#dbd7caee\" tabindex=\"0\"><code><span class=\"line\"><span>#!/bin/bash</span></span>\n<span class=\"line\"><span></span></span>\n<span class=\"line\"><span></span></span>\n<span class=\"line\"><span>DOMAIN=\"yourdomain.com\"</span></span>\n<span class=\"line\"><span>CERT_DIR=\"/etc/ssl/$DOMAIN\"</span></span>\n<span class=\"line\"><span>NGINX_CONF=\"/etc/nginx/conf.d/$DOMAIN.conf\"</span></span>\n<span class=\"line\"><span></span></span>\n<span class=\"line\"><span></span></span>\n<span class=\"line\"><span>mkdir -p $CERT_DIR</span></span>\n<span class=\"line\"><span>chmod 700 $CERT_DIR</span></span>\n<span class=\"line\"><span></span></span>\n<span class=\"line\"><span></span></span>\n<span class=\"line\"><span>cp /path/to/your/certificate.crt $CERT_DIR/cert.pem</span></span>\n<span class=\"line\"><span>cp /path/to/your/private.key $CERT_DIR/key.pem</span></span>\n<span class=\"line\"><span></span></span>\n<span class=\"line\"><span></span></span>\n<span class=\"line\"><span>chmod 400 $CERT_DIR/key.pem</span></span>\n<span class=\"line\"><span>chmod 444 $CERT_DIR/cert.pem</span></span>\n<span class=\"line\"><span></span></span>\n<span class=\"line\"><span></span></span>\n<span class=\"line\"><span>cat > $NGINX_CONF &#x3C;&#x3C;EOF</span></span>\n<span class=\"line\"><span>server {</span></span>\n<span class=\"line\"><span>    listen 443 ssl;</span></span>\n<span class=\"line\"><span>    server_name $DOMAIN;</span></span>\n<span class=\"line\"><span>  </span></span>\n<span class=\"line\"><span>    ssl_certificate $CERT_DIR/cert.pem;</span></span>\n<span class=\"line\"><span>    ssl_certificate_key $CERT_DIR/key.pem;</span></span>\n<span class=\"line\"><span>  </span></span>\n<span class=\"line\"><span>    # 其他SSL配置</span></span>\n<span class=\"line\"><span>    ssl_protocols TLSv1.2 TLSv1.3;</span></span>\n<span class=\"line\"><span>    ssl_ciphers 'ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256...';</span></span>\n<span class=\"line\"><span>    ssl_prefer_server_ciphers on;</span></span>\n<span class=\"line\"><span>  </span></span>\n<span class=\"line\"><span>    # 其他配置...</span></span>\n<span class=\"line\"><span>}</span></span>\n<span class=\"line\"><span>EOF</span></span>\n<span class=\"line\"><span></span></span>\n<span class=\"line\"><span></span></span>\n<span class=\"line\"><span>nginx -t &#x26;&#x26; systemctl restart nginx</span></span></code></pre>"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "#!/bin/bash\n\n\nDOMAIN=\"yourdomain.com\"\nCERT_DIR=\"/etc/ssl/$DOMAIN\"\nNGINX_CONF=\"/etc/nginx/conf.d/$DOMAIN.conf\"\n\n\nmkdir -p $CERT_DIR\nchmod 700 $CERT_DIR\n\n\ncp /path/to/your/certificate.crt $CERT_DIR/cert.pem\ncp /path/to/your/private.key $CERT_DIR/key.pem\n\n\nchmod 400 $CERT_DIR/key.pem\nchmod 444 $CERT_DIR/cert.pem\n\n\ncat > $NGINX_CONF <<EOF\nserver {\n    listen 443 ssl;\n    server_name $DOMAIN;\n  \n    ssl_certificate $CERT_DIR/cert.pem;\n    ssl_certificate_key $CERT_DIR/key.pem;\n  \n    # 其他SSL配置\n    ssl_protocols TLSv1.2 TLSv1.3;\n    ssl_ciphers 'ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256...';\n    ssl_prefer_server_ciphers on;\n  \n    # 其他配置...\n}\nEOF\n\n\nnginx -t && systemctl restart nginx\n"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "id": "方法三使用lets-encrypt的certbot",
+        "data-toc-id": "方法三使用lets-encrypt的certbot",
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "方法三：使用Let's Encrypt的certbot"
+        }
+      ]
+    },
+    {
+      "type": "codeBlock",
+      "attrs": {
+        "language": null,
+        "highlightedHtml": "<pre class=\"shiki shiki-themes vitesse-light vitesse-dark\" style=\"background-color:#ffffff;--shiki-dark-bg:#18181b;color:#393a34;--shiki-dark:#dbd7caee\" tabindex=\"0\"><code><span class=\"line\"><span>#!/bin/bash</span></span>\n<span class=\"line\"><span></span></span>\n<span class=\"line\"><span></span></span>\n<span class=\"line\"><span>sudo apt update</span></span>\n<span class=\"line\"><span>sudo apt install -y certbot python3-certbot-nginx</span></span>\n<span class=\"line\"><span></span></span>\n<span class=\"line\"><span></span></span>\n<span class=\"line\"><span>sudo certbot --nginx -d yourdomain.com -d www.yourdomain.com</span></span>\n<span class=\"line\"><span></span></span>\n<span class=\"line\"><span></span></span>\n<span class=\"line\"><span>echo \"0 0,12 * * * root /usr/bin/certbot renew --quiet\" | sudo tee -a /etc/crontab > /dev/null</span></span></code></pre>"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "#!/bin/bash\n\n\nsudo apt update\nsudo apt install -y certbot python3-certbot-nginx\n\n\nsudo certbot --nginx -d yourdomain.com -d www.yourdomain.com\n\n\necho \"0 0,12 * * * root /usr/bin/certbot renew --quiet\" | sudo tee -a /etc/crontab > /dev/null\n"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "id": "注意事项",
+        "data-toc-id": "注意事项",
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "注意事项"
+        }
+      ]
+    },
+    {
+      "type": "orderedList",
+      "attrs": {
+        "start": 1,
+        "type": null
+      },
+      "content": [
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "在执行脚本前，请确保："
+                }
+              ]
+            },
+            {
+              "type": "bulletList",
+              "content": [
+                {
+                  "type": "listItem",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "域名已解析到您的飞牛OS服务器"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "listItem",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "80和443端口已开放"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "listItem",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "已安装Nginx或其他Web服务器"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "对于飞牛OS特有的路径或服务名，可能需要根据实际情况调整脚本"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "建议先备份现有的配置文件"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "使用前请替换脚本中的域名、路径等占位符"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "如果是自签名证书，可以使用openssl命令生成："
+                }
+              ]
+            },
+            {
+              "type": "codeBlock",
+              "attrs": {
+                "language": null,
+                "highlightedHtml": "<pre class=\"shiki shiki-themes vitesse-light vitesse-dark\" style=\"background-color:#ffffff;--shiki-dark-bg:#18181b;color:#393a34;--shiki-dark:#dbd7caee\" tabindex=\"0\"><code><span class=\"line\"><span>openssl req -x509 -nodes -days 365 -newkey rsa:2048 \\</span></span>\n<span class=\"line\"><span>  -keyout /path/to/key.pem -out /path/to/cert.pem \\</span></span>\n<span class=\"line\"><span>  -subj \"/CN=yourdomain.com\"</span></span></code></pre>"
+              },
+              "content": [
+                {
+                  "type": "text",
+                  "text": "openssl req -x509 -nodes -days 365 -newkey rsa:2048 \\\n  -keyout /path/to/key.pem -out /path/to/cert.pem \\\n  -subj \"/CN=yourdomain.com\"\n"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "希望这些脚本能帮助您在飞牛OS上设置SSL证书。根据您的具体需求和环境选择合适的方法。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "本回答由 AI 生成，内容仅供参考，请仔细甄别。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "linux 设置ssl证书"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "id": "在linux系统上设置ssl证书的完整指南",
+        "data-toc-id": "在linux系统上设置ssl证书的完整指南",
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "在Linux系统上设置SSL证书的完整指南"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "在Linux服务器上设置SSL证书可以确保网站通信的安全性。以下是几种常用方法和详细步骤："
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "id": "一使用lets-encrypt免费证书推荐",
+        "data-toc-id": "一使用lets-encrypt免费证书推荐",
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "一、使用Let's Encrypt免费证书（推荐）"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "id": "1-安装certbot工具",
+        "data-toc-id": "1-安装certbot工具",
+        "level": 3
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "1. 安装Certbot工具"
+        }
+      ]
+    },
+    {
+      "type": "codeBlock",
+      "attrs": {
+        "language": null,
+        "highlightedHtml": "<pre class=\"shiki shiki-themes vitesse-light vitesse-dark\" style=\"background-color:#ffffff;--shiki-dark-bg:#18181b;color:#393a34;--shiki-dark:#dbd7caee\" tabindex=\"0\"><code><span class=\"line\"><span>sudo apt update</span></span>\n<span class=\"line\"><span>sudo apt install certbot python3-certbot-nginx  </span></span>\n<span class=\"line\"><span></span></span>\n<span class=\"line\"><span>sudo apt install certbot python3-certbot-apache  </span></span>\n<span class=\"line\"><span></span></span>\n<span class=\"line\"><span></span></span>\n<span class=\"line\"><span>sudo yum install epel-release</span></span>\n<span class=\"line\"><span>sudo yum install certbot python3-certbot-nginx</span></span></code></pre>"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "sudo apt update\nsudo apt install certbot python3-certbot-nginx  \n\nsudo apt install certbot python3-certbot-apache  \n\n\nsudo yum install epel-release\nsudo yum install certbot python3-certbot-nginx\n"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "id": "2-获取证书",
+        "data-toc-id": "2-获取证书",
+        "level": 3
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "2. 获取证书"
+        }
+      ]
+    },
+    {
+      "type": "codeBlock",
+      "attrs": {
+        "language": null,
+        "highlightedHtml": "<pre class=\"shiki shiki-themes vitesse-light vitesse-dark\" style=\"background-color:#ffffff;--shiki-dark-bg:#18181b;color:#393a34;--shiki-dark:#dbd7caee\" tabindex=\"0\"><code><span class=\"line\"><span>sudo certbot --nginx -d example.com -d www.example.com</span></span>\n<span class=\"line\"><span></span></span>\n<span class=\"line\"><span></span></span>\n<span class=\"line\"><span>sudo certbot --apache -d example.com -d www.example.com</span></span>\n<span class=\"line\"><span></span></span>\n<span class=\"line\"><span></span></span>\n<span class=\"line\"><span>sudo certbot certonly --standalone -d example.com</span></span></code></pre>"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "sudo certbot --nginx -d example.com -d www.example.com\n\n\nsudo certbot --apache -d example.com -d www.example.com\n\n\nsudo certbot certonly --standalone -d example.com\n"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "id": "3-自动续订设置",
+        "data-toc-id": "3-自动续订设置",
+        "level": 3
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "3. 自动续订设置"
+        }
+      ]
+    },
+    {
+      "type": "codeBlock",
+      "attrs": {
+        "language": null,
+        "highlightedHtml": "<pre class=\"shiki shiki-themes vitesse-light vitesse-dark\" style=\"background-color:#ffffff;--shiki-dark-bg:#18181b;color:#393a34;--shiki-dark:#dbd7caee\" tabindex=\"0\"><code><span class=\"line\"><span>sudo certbot renew --dry-run</span></span>\n<span class=\"line\"><span></span></span>\n<span class=\"line\"><span></span></span>\n<span class=\"line\"><span>sudo crontab -e</span></span>\n<span class=\"line\"><span></span></span>\n<span class=\"line\"><span>0 2 * * * /usr/bin/certbot renew --quiet</span></span></code></pre>"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "sudo certbot renew --dry-run\n\n\nsudo crontab -e\n\n0 2 * * * /usr/bin/certbot renew --quiet\n"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "id": "二手动安装已有证书",
+        "data-toc-id": "二手动安装已有证书",
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "二、手动安装已有证书"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "id": "1-准备证书文件",
+        "data-toc-id": "1-准备证书文件",
+        "level": 3
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "1. 准备证书文件"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "通常需要三个文件："
+        }
+      ]
+    },
+    {
+      "type": "bulletList",
+      "content": [
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "证书文件（.crt或.pem）"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "证书链文件（可选，有时与证书合并）"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "私钥文件（.key）"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "id": "2-创建ssl证书目录",
+        "data-toc-id": "2-创建ssl证书目录",
+        "level": 3
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "2. 创建SSL证书目录"
+        }
+      ]
+    },
+    {
+      "type": "codeBlock",
+      "attrs": {
+        "language": null,
+        "highlightedHtml": "<pre class=\"shiki shiki-themes vitesse-light vitesse-dark\" style=\"background-color:#ffffff;--shiki-dark-bg:#18181b;color:#393a34;--shiki-dark:#dbd7caee\" tabindex=\"0\"><code><span class=\"line\"><span>sudo mkdir -p /etc/ssl/example.com</span></span>\n<span class=\"line\"><span>sudo chmod 700 /etc/ssl/example.com</span></span></code></pre>"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "sudo mkdir -p /etc/ssl/example.com\nsudo chmod 700 /etc/ssl/example.com\n"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "id": "3-复制证书文件",
+        "data-toc-id": "3-复制证书文件",
+        "level": 3
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "3. 复制证书文件"
+        }
+      ]
+    },
+    {
+      "type": "codeBlock",
+      "attrs": {
+        "language": null,
+        "highlightedHtml": "<pre class=\"shiki shiki-themes vitesse-light vitesse-dark\" style=\"background-color:#ffffff;--shiki-dark-bg:#18181b;color:#393a34;--shiki-dark:#dbd7caee\" tabindex=\"0\"><code><span class=\"line\"><span>sudo cp example.com.crt /etc/ssl/example.com/cert.pem</span></span>\n<span class=\"line\"><span>sudo cp example.com.key /etc/ssl/example.com/key.pem</span></span>\n<span class=\"line\"><span>sudo chmod 400 /etc/ssl/example.com/key.pem</span></span></code></pre>"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "sudo cp example.com.crt /etc/ssl/example.com/cert.pem\nsudo cp example.com.key /etc/ssl/example.com/key.pem\nsudo chmod 400 /etc/ssl/example.com/key.pem  \n"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "id": "三配置web服务器",
+        "data-toc-id": "三配置web服务器",
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "三、配置Web服务器"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "id": "nginx配置示例",
+        "data-toc-id": "nginx配置示例",
+        "level": 3
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Nginx配置示例"
+        }
+      ]
+    },
+    {
+      "type": "codeBlock",
+      "attrs": {
+        "language": null,
+        "highlightedHtml": "<pre class=\"shiki shiki-themes vitesse-light vitesse-dark\" style=\"background-color:#ffffff;--shiki-dark-bg:#18181b;color:#393a34;--shiki-dark:#dbd7caee\" tabindex=\"0\"><code><span class=\"line\"><span>server {</span></span>\n<span class=\"line\"><span>    listen 443 ssl;</span></span>\n<span class=\"line\"><span>    server_name example.com www.example.com;</span></span>\n<span class=\"line\"><span></span></span>\n<span class=\"line\"><span>    ssl_certificate /etc/ssl/example.com/cert.pem;</span></span>\n<span class=\"line\"><span>    ssl_certificate_key /etc/ssl/example.com/key.pem;</span></span>\n<span class=\"line\"><span>  </span></span>\n<span class=\"line\"><span>  </span></span>\n<span class=\"line\"><span>    ssl_protocols TLSv1.2 TLSv1.3;</span></span>\n<span class=\"line\"><span>    ssl_prefer_server_ciphers on;</span></span>\n<span class=\"line\"><span>    ssl_ciphers \"EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH\";</span></span>\n<span class=\"line\"><span>    ssl_ecdh_curve secp384r1;</span></span>\n<span class=\"line\"><span>    ssl_session_cache shared:SSL:10m;</span></span>\n<span class=\"line\"><span>    ssl_session_tickets off;</span></span>\n<span class=\"line\"><span>    ssl_stapling on;</span></span>\n<span class=\"line\"><span>    ssl_stapling_verify on;</span></span>\n<span class=\"line\"><span>  </span></span>\n<span class=\"line\"><span>  </span></span>\n<span class=\"line\"><span>}</span></span>\n<span class=\"line\"><span></span></span>\n<span class=\"line\"><span></span></span>\n<span class=\"line\"><span>server {</span></span>\n<span class=\"line\"><span>    listen 80;</span></span>\n<span class=\"line\"><span>    server_name example.com www.example.com;</span></span>\n<span class=\"line\"><span>    return 301 https://$host$request_uri;</span></span>\n<span class=\"line\"><span>}</span></span></code></pre>"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "server {\n    listen 443 ssl;\n    server_name example.com www.example.com;\n\n    ssl_certificate /etc/ssl/example.com/cert.pem;\n    ssl_certificate_key /etc/ssl/example.com/key.pem;\n  \n  \n    ssl_protocols TLSv1.2 TLSv1.3;\n    ssl_prefer_server_ciphers on;\n    ssl_ciphers \"EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH\";\n    ssl_ecdh_curve secp384r1;\n    ssl_session_cache shared:SSL:10m;\n    ssl_session_tickets off;\n    ssl_stapling on;\n    ssl_stapling_verify on;\n  \n  \n}\n\n\nserver {\n    listen 80;\n    server_name example.com www.example.com;\n    return 301 https://$host$request_uri;\n}\n"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "id": "apache配置示例",
+        "data-toc-id": "apache配置示例",
+        "level": 3
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Apache配置示例"
+        }
+      ]
+    },
+    {
+      "type": "codeBlock",
+      "attrs": {
+        "language": null,
+        "highlightedHtml": "<pre class=\"shiki shiki-themes vitesse-light vitesse-dark\" style=\"background-color:#ffffff;--shiki-dark-bg:#18181b;color:#393a34;--shiki-dark:#dbd7caee\" tabindex=\"0\"><code><span class=\"line\"><span>&#x3C;VirtualHost *:443></span></span>\n<span class=\"line\"><span>    ServerName example.com</span></span>\n<span class=\"line\"><span>    ServerAlias www.example.com</span></span>\n<span class=\"line\"><span>  </span></span>\n<span class=\"line\"><span>    SSLEngine on</span></span>\n<span class=\"line\"><span>    SSLCertificateFile /etc/ssl/example.com/cert.pem</span></span>\n<span class=\"line\"><span>    SSLCertificateKeyFile /etc/ssl/example.com/key.pem</span></span>\n<span class=\"line\"><span>    # 如果有中间证书</span></span>\n<span class=\"line\"><span>    SSLCertificateChainFile /etc/ssl/example.com/intermediate.pem</span></span>\n<span class=\"line\"><span>  </span></span>\n<span class=\"line\"><span>    # 其他配置...</span></span>\n<span class=\"line\"><span>&#x3C;/VirtualHost></span></span>\n<span class=\"line\"><span></span></span>\n<span class=\"line\"><span># 强制HTTP跳转到HTTPS</span></span>\n<span class=\"line\"><span>&#x3C;VirtualHost *:80></span></span>\n<span class=\"line\"><span>    ServerName example.com</span></span>\n<span class=\"line\"><span>    ServerAlias www.example.com</span></span>\n<span class=\"line\"><span>    Redirect permanent / https://example.com/</span></span>\n<span class=\"line\"><span>&#x3C;/VirtualHost></span></span></code></pre>"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "<VirtualHost *:443>\n    ServerName example.com\n    ServerAlias www.example.com\n  \n    SSLEngine on\n    SSLCertificateFile /etc/ssl/example.com/cert.pem\n    SSLCertificateKeyFile /etc/ssl/example.com/key.pem\n    # 如果有中间证书\n    SSLCertificateChainFile /etc/ssl/example.com/intermediate.pem\n  \n    # 其他配置...\n</VirtualHost>\n\n# 强制HTTP跳转到HTTPS\n<VirtualHost *:80>\n    ServerName example.com\n    ServerAlias www.example.com\n    Redirect permanent / https://example.com/\n</VirtualHost>\n"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "id": "四验证ssl配置",
+        "data-toc-id": "四验证ssl配置",
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "四、验证SSL配置"
+        }
+      ]
+    },
+    {
+      "type": "orderedList",
+      "attrs": {
+        "start": 1,
+        "type": null
+      },
+      "content": [
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "检查配置语法："
+                }
+              ]
+            },
+            {
+              "type": "codeBlock",
+              "attrs": {
+                "language": null,
+                "highlightedHtml": "<pre class=\"shiki shiki-themes vitesse-light vitesse-dark\" style=\"background-color:#ffffff;--shiki-dark-bg:#18181b;color:#393a34;--shiki-dark:#dbd7caee\" tabindex=\"0\"><code><span class=\"line\"><span>sudo nginx -t</span></span>\n<span class=\"line\"><span></span></span>\n<span class=\"line\"><span></span></span>\n<span class=\"line\"><span>sudo apachectl configtest</span></span></code></pre>"
+              },
+              "content": [
+                {
+                  "type": "text",
+                  "text": "sudo nginx -t\n\n\nsudo apachectl configtest\n"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "重启服务："
+                }
+              ]
+            },
+            {
+              "type": "codeBlock",
+              "attrs": {
+                "language": null,
+                "highlightedHtml": "<pre class=\"shiki shiki-themes vitesse-light vitesse-dark\" style=\"background-color:#ffffff;--shiki-dark-bg:#18181b;color:#393a34;--shiki-dark:#dbd7caee\" tabindex=\"0\"><code><span class=\"line\"><span>sudo systemctl restart nginx</span></span>\n<span class=\"line\"><span></span></span>\n<span class=\"line\"><span></span></span>\n<span class=\"line\"><span>sudo systemctl restart apache2</span></span></code></pre>"
+              },
+              "content": [
+                {
+                  "type": "text",
+                  "text": "sudo systemctl restart nginx\n\n\nsudo systemctl restart apache2\n"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "在线验证工具："
+                }
+              ]
+            },
+            {
+              "type": "bulletList",
+              "content": [
+                {
+                  "type": "listItem",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": [
+                        {
+                          "type": "text",
+                          "marks": [
+                            {
+                              "type": "link",
+                              "attrs": {
+                                "href": "https://www.ssllabs.com/ssltest/",
+                                "target": "_blank",
+                                "rel": "noopener noreferrer nofollow",
+                                "class": "",
+                                "title": null
+                              }
+                            }
+                          ],
+                          "text": "SSL Labs测试"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "listItem",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": [
+                        {
+                          "type": "text",
+                          "marks": [
+                            {
+                              "type": "link",
+                              "attrs": {
+                                "href": "https://www.sslshopper.com/ssl-checker.html",
+                                "target": "_blank",
+                                "rel": "noopener noreferrer nofollow",
+                                "class": "",
+                                "title": null
+                              }
+                            }
+                          ],
+                          "text": "SSL Checker"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "id": "五生成自签名证书测试用途",
+        "data-toc-id": "五生成自签名证书测试用途",
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "五、生成自签名证书（测试用途）"
+        }
+      ]
+    },
+    {
+      "type": "codeBlock",
+      "attrs": {
+        "language": null,
+        "highlightedHtml": "<pre class=\"shiki shiki-themes vitesse-light vitesse-dark\" style=\"background-color:#ffffff;--shiki-dark-bg:#18181b;color:#393a34;--shiki-dark:#dbd7caee\" tabindex=\"0\"><code><span class=\"line\"><span>sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 \\</span></span>\n<span class=\"line\"><span>  -keyout /etc/ssl/example.com/key.pem \\</span></span>\n<span class=\"line\"><span>  -out /etc/ssl/example.com/cert.pem \\</span></span>\n<span class=\"line\"><span>  -subj \"/CN=example.com\"</span></span></code></pre>"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 \\\n  -keyout /etc/ssl/example.com/key.pem \\\n  -out /etc/ssl/example.com/cert.pem \\\n  -subj \"/CN=example.com\"\n"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "id": "六常见问题解决",
+        "data-toc-id": "六常见问题解决",
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "六、常见问题解决"
+        }
+      ]
+    },
+    {
+      "type": "orderedList",
+      "attrs": {
+        "start": 1,
+        "type": null
+      },
+      "content": [
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "​"
+                },
+                {
+                  "type": "text",
+                  "marks": [
+                    {
+                      "type": "bold"
+                    }
+                  ],
+                  "text": "证书不信任"
+                },
+                {
+                  "type": "text",
+                  "text": "：确保安装了完整的证书链"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "​"
+                },
+                {
+                  "type": "text",
+                  "marks": [
+                    {
+                      "type": "bold"
+                    }
+                  ],
+                  "text": "私钥不匹配"
+                },
+                {
+                  "type": "text",
+                  "text": "：检查证书和私钥是否配对"
+                }
+              ]
+            },
+            {
+              "type": "codeBlock",
+              "attrs": {
+                "language": null,
+                "highlightedHtml": "<pre class=\"shiki shiki-themes vitesse-light vitesse-dark\" style=\"background-color:#ffffff;--shiki-dark-bg:#18181b;color:#393a34;--shiki-dark:#dbd7caee\" tabindex=\"0\"><code><span class=\"line\"><span>openssl x509 -noout -modulus -in cert.pem | openssl md5</span></span>\n<span class=\"line\"><span>openssl rsa -noout -modulus -in key.pem | openssl md5</span></span></code></pre>"
+              },
+              "content": [
+                {
+                  "type": "text",
+                  "text": "openssl x509 -noout -modulus -in cert.pem | openssl md5\nopenssl rsa -noout -modulus -in key.pem | openssl md5\n"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "​"
+                },
+                {
+                  "type": "text",
+                  "marks": [
+                    {
+                      "type": "bold"
+                    }
+                  ],
+                  "text": "HSTS配置"
+                },
+                {
+                  "type": "text",
+                  "text": "：在Nginx中添加"
+                }
+              ]
+            },
+            {
+              "type": "codeBlock",
+              "attrs": {
+                "language": null,
+                "highlightedHtml": "<pre class=\"shiki shiki-themes vitesse-light vitesse-dark\" style=\"background-color:#ffffff;--shiki-dark-bg:#18181b;color:#393a34;--shiki-dark:#dbd7caee\" tabindex=\"0\"><code><span class=\"line\"><span>add_header Strict-Transport-Security \"max-age=31536000; includeSubDomains\" always;</span></span></code></pre>"
+              },
+              "content": [
+                {
+                  "type": "text",
+                  "text": "add_header Strict-Transport-Security \"max-age=31536000; includeSubDomains\" always;\n"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "通过以上步骤，您应该能够在Linux服务器上成功配置SSL证书。对于生产环境，建议使用Let's Encrypt等受信任的证书颁发机构提供的证书。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "本回答由 AI 生成，内容仅供参考，请仔细甄别。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "linux系统默认的 ssl证书目录"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "在 Linux 系统中，SSL/TLS 证书的默认存储目录可能因发行版和用途（系统级证书 vs. 服务特定证书）而有所不同。以下是常见的默认目录："
+        }
+      ]
+    },
+    {
+      "type": "horizontalRule"
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "id": "1-系统信任的ca证书存储目录",
+        "data-toc-id": "1-系统信任的ca证书存储目录",
+        "level": 3
+      },
+      "content": [
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "1. 系统信任的CA证书存储目录"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "这些目录存放受系统信任的根证书和中间证书："
+        }
+      ]
+    },
+    {
+      "type": "bulletList",
+      "content": [
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "​"
+                },
+                {
+                  "type": "text",
+                  "marks": [
+                    {
+                      "type": "bold"
+                    }
+                  ],
+                  "text": "Debian/Ubuntu 及其衍生版"
+                },
+                {
+                  "type": "text",
+                  "text": "："
+                }
+              ]
+            },
+            {
+              "type": "codeBlock",
+              "attrs": {
+                "language": null,
+                "highlightedHtml": "<pre class=\"shiki shiki-themes vitesse-light vitesse-dark\" style=\"background-color:#ffffff;--shiki-dark-bg:#18181b;color:#393a34;--shiki-dark:#dbd7caee\" tabindex=\"0\"><code><span class=\"line\"><span>/etc/ssl/certs/             </span></span>\n<span class=\"line\"><span>/usr/share/ca-certificates/   </span></span>\n<span class=\"line\"><span>/etc/ca-certificates/</span></span></code></pre>"
+              },
+              "content": [
+                {
+                  "type": "text",
+                  "text": "/etc/ssl/certs/             \n/usr/share/ca-certificates/   \n/etc/ca-certificates/       \n"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "​"
+                },
+                {
+                  "type": "text",
+                  "marks": [
+                    {
+                      "type": "bold"
+                    }
+                  ],
+                  "text": "RHEL/CentOS/Fedora"
+                },
+                {
+                  "type": "text",
+                  "text": "："
+                }
+              ]
+            },
+            {
+              "type": "codeBlock",
+              "attrs": {
+                "language": null,
+                "highlightedHtml": "<pre class=\"shiki shiki-themes vitesse-light vitesse-dark\" style=\"background-color:#ffffff;--shiki-dark-bg:#18181b;color:#393a34;--shiki-dark:#dbd7caee\" tabindex=\"0\"><code><span class=\"line\"><span>/etc/pki/ca-trust/source/anchors/  </span></span>\n<span class=\"line\"><span>/etc/pki/tls/certs/              </span></span>\n<span class=\"line\"><span>/etc/pki/tls/private/</span></span></code></pre>"
+              },
+              "content": [
+                {
+                  "type": "text",
+                  "text": "/etc/pki/ca-trust/source/anchors/  \n/etc/pki/tls/certs/              \n/etc/pki/tls/private/            \n"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "​"
+                },
+                {
+                  "type": "text",
+                  "marks": [
+                    {
+                      "type": "bold"
+                    }
+                  ],
+                  "text": "通用路径（多数发行版）"
+                },
+                {
+                  "type": "text",
+                  "text": " ："
+                }
+              ]
+            },
+            {
+              "type": "codeBlock",
+              "attrs": {
+                "language": null,
+                "highlightedHtml": "<pre class=\"shiki shiki-themes vitesse-light vitesse-dark\" style=\"background-color:#ffffff;--shiki-dark-bg:#18181b;color:#393a34;--shiki-dark:#dbd7caee\" tabindex=\"0\"><code><span class=\"line\"><span>/etc/ssl/             </span></span>\n<span class=\"line\"><span>/usr/local/ssl/certs/</span></span></code></pre>"
+              },
+              "content": [
+                {
+                  "type": "text",
+                  "text": "/etc/ssl/             \n/usr/local/ssl/certs/   \n"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "horizontalRule"
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "id": "2-服务特定的证书目录",
+        "data-toc-id": "2-服务特定的证书目录",
+        "level": 3
+      },
+      "content": [
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "2. 服务特定的证书目录"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "不同服务（如Nginx、Apache、Postfix等）可能有自己的专用目录："
+        }
+      ]
+    },
+    {
+      "type": "bulletList",
+      "content": [
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "​"
+                },
+                {
+                  "type": "text",
+                  "marks": [
+                    {
+                      "type": "bold"
+                    }
+                  ],
+                  "text": "Nginx"
+                },
+                {
+                  "type": "text",
+                  "text": "："
+                }
+              ]
+            },
+            {
+              "type": "codeBlock",
+              "attrs": {
+                "language": null,
+                "highlightedHtml": "<pre class=\"shiki shiki-themes vitesse-light vitesse-dark\" style=\"background-color:#ffffff;--shiki-dark-bg:#18181b;color:#393a34;--shiki-dark:#dbd7caee\" tabindex=\"0\"><code><span class=\"line\"><span>/etc/nginx/ssl/        </span></span>\n<span class=\"line\"><span>/etc/nginx/certs/</span></span></code></pre>"
+              },
+              "content": [
+                {
+                  "type": "text",
+                  "text": "/etc/nginx/ssl/        \n/etc/nginx/certs/      \n"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "​"
+                },
+                {
+                  "type": "text",
+                  "marks": [
+                    {
+                      "type": "bold"
+                    }
+                  ],
+                  "text": "Apache"
+                },
+                {
+                  "type": "text",
+                  "text": "："
+                }
+              ]
+            },
+            {
+              "type": "codeBlock",
+              "attrs": {
+                "language": null,
+                "highlightedHtml": "<pre class=\"shiki shiki-themes vitesse-light vitesse-dark\" style=\"background-color:#ffffff;--shiki-dark-bg:#18181b;color:#393a34;--shiki-dark:#dbd7caee\" tabindex=\"0\"><code><span class=\"line\"><span>/etc/apache2/ssl/      </span></span>\n<span class=\"line\"><span>/etc/httpd/conf/ssl/</span></span></code></pre>"
+              },
+              "content": [
+                {
+                  "type": "text",
+                  "text": "/etc/apache2/ssl/      \n/etc/httpd/conf/ssl/   \n"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "​"
+                },
+                {
+                  "type": "text",
+                  "marks": [
+                    {
+                      "type": "bold"
+                    }
+                  ],
+                  "text": "其他服务"
+                },
+                {
+                  "type": "text",
+                  "text": "："
+                }
+              ]
+            },
+            {
+              "type": "codeBlock",
+              "attrs": {
+                "language": null,
+                "highlightedHtml": "<pre class=\"shiki shiki-themes vitesse-light vitesse-dark\" style=\"background-color:#ffffff;--shiki-dark-bg:#18181b;color:#393a34;--shiki-dark:#dbd7caee\" tabindex=\"0\"><code><span class=\"line\"><span>/etc/postfix/ssl/      </span></span>\n<span class=\"line\"><span>/etc/dovecot/ssl/      </span></span>\n<span class=\"line\"><span>/etc/letsencrypt/live/</span></span></code></pre>"
+              },
+              "content": [
+                {
+                  "type": "text",
+                  "text": "/etc/postfix/ssl/      \n/etc/dovecot/ssl/      \n/etc/letsencrypt/live/   \n"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "horizontalRule"
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "id": "3-证书管理工具",
+        "data-toc-id": "3-证书管理工具",
+        "level": 3
+      },
+      "content": [
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "3. 证书管理工具"
+        }
+      ]
+    },
+    {
+      "type": "bulletList",
+      "content": [
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "​"
+                },
+                {
+                  "type": "text",
+                  "marks": [
+                    {
+                      "type": "bold"
+                    }
+                  ],
+                  "text": "Let's Encrypt (Certbot)"
+                },
+                {
+                  "type": "text",
+                  "text": " ："
+                }
+              ]
+            },
+            {
+              "type": "codeBlock",
+              "attrs": {
+                "language": null,
+                "highlightedHtml": "<pre class=\"shiki shiki-themes vitesse-light vitesse-dark\" style=\"background-color:#ffffff;--shiki-dark-bg:#18181b;color:#393a34;--shiki-dark:#dbd7caee\" tabindex=\"0\"><code><span class=\"line\"><span>/etc/letsencrypt/live/yourdomain.com/  </span></span>\n<span class=\"line\"><span>  ├── cert.pem    </span></span>\n<span class=\"line\"><span>  ├── chain.pem   </span></span>\n<span class=\"line\"><span>  ├── fullchain.pem </span></span>\n<span class=\"line\"><span>  └── privkey.pem</span></span></code></pre>"
+              },
+              "content": [
+                {
+                  "type": "text",
+                  "text": "/etc/letsencrypt/live/yourdomain.com/  \n  ├── cert.pem    \n  ├── chain.pem   \n  ├── fullchain.pem \n  └── privkey.pem   \n"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "​"
+                },
+                {
+                  "type": "text",
+                  "marks": [
+                    {
+                      "type": "bold"
+                    }
+                  ],
+                  "text": "手动安装证书"
+                },
+                {
+                  "type": "text",
+                  "text": "​："
+                },
+                {
+                  "type": "hardBreak"
+                },
+                {
+                  "type": "text",
+                  "text": "建议统一存放在 "
+                },
+                {
+                  "type": "text",
+                  "marks": [
+                    {
+                      "type": "code"
+                    }
+                  ],
+                  "text": "/etc/ssl/"
+                },
+                {
+                  "type": "text",
+                  "text": " 的子目录中，例如："
+                }
+              ]
+            },
+            {
+              "type": "codeBlock",
+              "attrs": {
+                "language": null,
+                "highlightedHtml": "<pre class=\"shiki shiki-themes vitesse-light vitesse-dark\" style=\"background-color:#ffffff;--shiki-dark-bg:#18181b;color:#393a34;--shiki-dark:#dbd7caee\" tabindex=\"0\"><code><span class=\"line\"><span>/etc/ssl/yourdomain.com/</span></span>\n<span class=\"line\"><span>  ├── cert.pem</span></span>\n<span class=\"line\"><span>  └── private.key</span></span></code></pre>"
+              },
+              "content": [
+                {
+                  "type": "text",
+                  "text": "/etc/ssl/yourdomain.com/\n  ├── cert.pem\n  └── private.key  \n"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "horizontalRule"
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "id": "4-重要命令",
+        "data-toc-id": "4-重要命令",
+        "level": 3
+      },
+      "content": [
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "4. 重要命令"
+        }
+      ]
+    },
+    {
+      "type": "bulletList",
+      "content": [
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "​"
+                },
+                {
+                  "type": "text",
+                  "marks": [
+                    {
+                      "type": "bold"
+                    }
+                  ],
+                  "text": "查看系统信任的证书列表"
+                },
+                {
+                  "type": "text",
+                  "text": "："
+                }
+              ]
+            },
+            {
+              "type": "codeBlock",
+              "attrs": {
+                "language": null,
+                "highlightedHtml": "<pre class=\"shiki shiki-themes vitesse-light vitesse-dark\" style=\"background-color:#ffffff;--shiki-dark-bg:#18181b;color:#393a34;--shiki-dark:#dbd7caee\" tabindex=\"0\"><code><span class=\"line\"><span>ls -l /etc/ssl/certs/</span></span>\n<span class=\"line\"><span></span></span>\n<span class=\"line\"><span></span></span>\n<span class=\"line\"><span>ls -l /etc/pki/tls/certs/</span></span></code></pre>"
+              },
+              "content": [
+                {
+                  "type": "text",
+                  "text": "ls -l /etc/ssl/certs/\n\n\nls -l /etc/pki/tls/certs/\n"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "​"
+                },
+                {
+                  "type": "text",
+                  "marks": [
+                    {
+                      "type": "bold"
+                    }
+                  ],
+                  "text": "更新系统CA证书存储"
+                },
+                {
+                  "type": "text",
+                  "text": "："
+                }
+              ]
+            },
+            {
+              "type": "codeBlock",
+              "attrs": {
+                "language": null,
+                "highlightedHtml": "<pre class=\"shiki shiki-themes vitesse-light vitesse-dark\" style=\"background-color:#ffffff;--shiki-dark-bg:#18181b;color:#393a34;--shiki-dark:#dbd7caee\" tabindex=\"0\"><code><span class=\"line\"><span>sudo update-ca-certificates</span></span>\n<span class=\"line\"><span></span></span>\n<span class=\"line\"><span></span></span>\n<span class=\"line\"><span>sudo update-ca-trust</span></span></code></pre>"
+              },
+              "content": [
+                {
+                  "type": "text",
+                  "text": "sudo update-ca-certificates\n\n\nsudo update-ca-trust\n"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "horizontalRule"
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "id": "5-安全注意事项",
+        "data-toc-id": "5-安全注意事项",
+        "level": 3
+      },
+      "content": [
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "5. 安全注意事项"
+        }
+      ]
+    },
+    {
+      "type": "orderedList",
+      "attrs": {
+        "start": 1,
+        "type": null
+      },
+      "content": [
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "​"
+                },
+                {
+                  "type": "text",
+                  "marks": [
+                    {
+                      "type": "bold"
+                    }
+                  ],
+                  "text": "私钥权限"
+                },
+                {
+                  "type": "text",
+                  "text": "​：私钥文件应设置为 "
+                },
+                {
+                  "type": "text",
+                  "marks": [
+                    {
+                      "type": "code"
+                    }
+                  ],
+                  "text": "600"
+                },
+                {
+                  "type": "text",
+                  "text": "（仅所有者可读写）："
+                }
+              ]
+            },
+            {
+              "type": "codeBlock",
+              "attrs": {
+                "language": null,
+                "highlightedHtml": "<pre class=\"shiki shiki-themes vitesse-light vitesse-dark\" style=\"background-color:#ffffff;--shiki-dark-bg:#18181b;color:#393a34;--shiki-dark:#dbd7caee\" tabindex=\"0\"><code><span class=\"line\"><span>chmod 600 /path/to/private.key</span></span></code></pre>"
+              },
+              "content": [
+                {
+                  "type": "text",
+                  "text": "chmod 600 /path/to/private.key\n"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "​"
+                },
+                {
+                  "type": "text",
+                  "marks": [
+                    {
+                      "type": "bold"
+                    }
+                  ],
+                  "text": "避免混合存放"
+                },
+                {
+                  "type": "text",
+                  "text": "​：证书和私钥建议分开放置，私钥应存放在 "
+                },
+                {
+                  "type": "text",
+                  "marks": [
+                    {
+                      "type": "code"
+                    }
+                  ],
+                  "text": "/etc/ssl/private/"
+                },
+                {
+                  "type": "text",
+                  "text": " 或类似受限制的目录。"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "​"
+                },
+                {
+                  "type": "text",
+                  "marks": [
+                    {
+                      "type": "bold"
+                    }
+                  ],
+                  "text": "证书链完整"
+                },
+                {
+                  "type": "text",
+                  "text": "​：确保配置时包含完整的证书链（如 "
+                },
+                {
+                  "type": "text",
+                  "marks": [
+                    {
+                      "type": "code"
+                    }
+                  ],
+                  "text": "fullchain.pem"
+                },
+                {
+                  "type": "text",
+                  "text": "），否则可能导致浏览器警告。"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "horizontalRule"
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "id": "总结",
+        "data-toc-id": "总结",
+        "level": 3
+      },
+      "content": [
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "总结"
+        }
+      ]
+    },
+    {
+      "type": "bulletList",
+      "content": [
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "​"
+                },
+                {
+                  "type": "text",
+                  "marks": [
+                    {
+                      "type": "bold"
+                    }
+                  ],
+                  "text": "系统级CA证书"
+                },
+                {
+                  "type": "text",
+                  "text": "​：优先使用 "
+                },
+                {
+                  "type": "text",
+                  "marks": [
+                    {
+                      "type": "code"
+                    }
+                  ],
+                  "text": "/etc/ssl/certs/"
+                },
+                {
+                  "type": "text",
+                  "text": "​（Debian）或 "
+                },
+                {
+                  "type": "text",
+                  "marks": [
+                    {
+                      "type": "code"
+                    }
+                  ],
+                  "text": "/etc/pki/tls/certs/"
+                },
+                {
+                  "type": "text",
+                  "text": "（RHEL）。"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "​"
+                },
+                {
+                  "type": "text",
+                  "marks": [
+                    {
+                      "type": "bold"
+                    }
+                  ],
+                  "text": "服务专用证书"
+                },
+                {
+                  "type": "text",
+                  "text": "​：建议按服务创建子目录（如 "
+                },
+                {
+                  "type": "text",
+                  "marks": [
+                    {
+                      "type": "code"
+                    }
+                  ],
+                  "text": "/etc/nginx/ssl/"
+                },
+                {
+                  "type": "text",
+                  "text": "）。"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "​"
+                },
+                {
+                  "type": "text",
+                  "marks": [
+                    {
+                      "type": "bold"
+                    }
+                  ],
+                  "text": "Let's Encrypt"
+                },
+                {
+                  "type": "text",
+                  "text": "​：默认使用 "
+                },
+                {
+                  "type": "text",
+                  "marks": [
+                    {
+                      "type": "code"
+                    }
+                  ],
+                  "text": "/etc/letsencrypt/live/"
+                },
+                {
+                  "type": "text",
+                  "text": "。"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "根据您的发行版和服务需求选择合适的路径，并确保权限设置正确！"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "本回答由 AI 生成，内容仅供参考，请仔细甄别。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "内容由 AI 生成，请仔细甄别"
+        }
+      ]
+    }
+  ]
+}

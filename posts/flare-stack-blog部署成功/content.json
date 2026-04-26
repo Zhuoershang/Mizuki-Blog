@@ -1,0 +1,56 @@
+{
+  "type": "doc",
+  "content": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "这是我的第一篇"
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "link",
+              "attrs": {
+                "href": "https://github.com/du2333/flare-stack-blog",
+                "target": "_blank",
+                "rel": "noopener noreferrer nofollow",
+                "class": "font-normal underline underline-offset-4 decoration-border hover:decoration-foreground transition-all duration-300 cursor-pointer text-foreground",
+                "title": null
+              }
+            },
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "flare-stack-blog"
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "文章，部署成功！╰(*°▽°*)╯。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "感谢作者！"
+        }
+      ]
+    }
+  ]
+}

@@ -16,13 +16,13 @@ export type DeviceCategory = {
 };
 
 export const devicesData: DeviceCategory = {
-	OnePlus: [
+	VIVO: [
 		{
-			name: "OnePlus 13T",
-			image: "/images/device/oneplus13t.png",
-			specs: "Gray / 16G + 1TB",
-			description: "Flagship performance, Hasselblad imaging, 80W SuperVOOC.",
-			link: "https://www.oneplus.com/cn/13t",
+			name: "VIVO X90 PRO+",
+			image: "/images/device/vivo-x90-pro-plus.png",
+			specs: "Black / 16GB + 512GB",
+			description: "Flagship smartphone with MediaTek Dimensity 9200+ processor, 50MP quad-camera system with Zeiss optics, 6.78-inch AMOLED display, 4700mAh battery with 80W fast charging.",
+			link: "https://www.vivo.com.cn/vivo-x90-pro-plus",
 		},
 	],
 	Router: [

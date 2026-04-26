@@ -2,11 +2,13 @@
 title: Encrypted Post
 published: 2024-01-15
 description: This is an article for testing the page encryption feature
+image: "./cover.png"
 encrypted: true
 pinned: true
 password: "123456"
 tags: ["Test", "Encryption"]
 category: "Technology"
+draft: true
 ---
 
 This blog template is built with [Astro](https://astro.build/). For the things that are not mentioned in this guide, you may find the answers in the [Astro Docs](https://docs.astro.build/).

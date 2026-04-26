@@ -1,0 +1,1369 @@
+{
+  "type": "doc",
+  "content": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "在日常开发或网络调试中，我们经常需要快速开启或关闭 Windows 系统的 HTTP/HTTPS 代理，同时希望某些内网地址或特定域名"
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "不走代理"
+        },
+        {
+          "type": "text",
+          "text": "（即代理例外）。手动修改注册表或 Internet 选项比较繁琐，本文提供一段批处理脚本，实现："
+        }
+      ]
+    },
+    {
+      "type": "bulletList",
+      "content": [
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "一键检测当前代理状态（开启/关闭）"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "自动切换代理状态（开启 → 关闭，关闭 → 开启）"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "开启代理时"
+                },
+                {
+                  "type": "text",
+                  "marks": [
+                    {
+                      "type": "bold"
+                    }
+                  ],
+                  "text": "自动写入代理服务器地址和例外网址列表"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "关闭代理时可选择保留或清空例外列表"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "horizontalRule"
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "id": "准备工作",
+        "data-toc-id": "准备工作",
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "准备工作"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "id": "1-获取你的代理服务器地址",
+        "data-toc-id": "1-获取你的代理服务器地址",
+        "level": 3
+      },
+      "content": [
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "1. 获取你的代理服务器地址"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "例如："
+        }
+      ]
+    },
+    {
+      "type": "bulletList",
+      "content": [
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "marks": [
+                    {
+                      "type": "code"
+                    }
+                  ],
+                  "text": "127.0.0.1:7890"
+                },
+                {
+                  "type": "text",
+                  "text": "（Clash / v2rayN 等本地代理客户端）"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "marks": [
+                    {
+                      "type": "code"
+                    }
+                  ],
+                  "text": "192.168.1.100:8080"
+                },
+                {
+                  "type": "text",
+                  "text": "（企业代理）"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "id": "2-确定需要排除不走代理的网址",
+        "data-toc-id": "2-确定需要排除不走代理的网址",
+        "level": 3
+      },
+      "content": [
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "2. 确定需要排除（不走代理）的网址"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "支持通配符 "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "code"
+            }
+          ],
+          "text": "*"
+        },
+        {
+          "type": "text",
+          "text": "，多个地址用分号 "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "code"
+            }
+          ],
+          "text": ";"
+        },
+        {
+          "type": "text",
+          "text": " 隔开。常见排除示例："
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "text"
+        }
+      ]
+    },
+    {
+      "type": "codeBlock",
+      "attrs": {
+        "language": null,
+        "highlightedHtml": null
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "localhost;127.0.0.1;<local>;*.example.com;10.*.*.*"
+        }
+      ]
+    },
+    {
+      "type": "bulletList",
+      "content": [
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "marks": [
+                    {
+                      "type": "code"
+                    }
+                  ],
+                  "text": "<local>"
+                },
+                {
+                  "type": "text",
+                  "text": " 表示所有内网地址（系统保留关键字）"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "marks": [
+                    {
+                      "type": "code"
+                    }
+                  ],
+                  "text": "*.example.com"
+                },
+                {
+                  "type": "text",
+                  "text": " 匹配该域名下所有子域名"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "horizontalRule"
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "id": "完整脚本代码",
+        "data-toc-id": "完整脚本代码",
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "完整脚本代码"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "将以下内容保存为 "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "code"
+            }
+          ],
+          "text": "toggle_proxy.bat"
+        },
+        {
+          "type": "text",
+          "text": "，"
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "以 ANSI 编码"
+        },
+        {
+          "type": "text",
+          "text": "保存（否则中文可能乱码）。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "batch"
+        }
+      ]
+    },
+    {
+      "type": "codeBlock",
+      "attrs": {
+        "language": "shell",
+        "highlightedHtml": null
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "@echo off\nsetlocal enabledelayedexpansion\n\n:: ========== 请在这里修改你的配置 ==========\nset \"ProxyServerAddr=127.0.0.1:7890\"\nset \"excludeSites=localhost;127.0.0.1;<local>;*.example.com\"\n:: =========================================\n\nfor /f \"tokens=1,2,* \" %%i in ('REG QUERY \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\" /v ProxyEnable ^| find /i \"ProxyEnable\"') do (set /A ProxyEnableValue=%%k)\n\nif %ProxyEnableValue% equ 0 (\n    echo 系统代理目前处于关闭状态，正在开启代理，请稍候...\n    echo=\n    reg add \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\" /v ProxyEnable /t REG_DWORD /d 1 /f >nul 2>nul\n    reg add \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\" /v ProxyServer /d \"%ProxyServerAddr%\" /f >nul 2>nul\n    reg add \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\" /v ProxyOverride /d \"%excludeSites%\" /f >nul 2>nul\n    echo 系统代理已开启，代理地址：%ProxyServerAddr%\n    echo 例外网址：%excludeSites%\n    echo 请按任意键关闭本窗口...\n) else if %ProxyEnableValue% equ 1 (\n    echo 系统代理目前处于开启状态，正在关闭代理，请稍候...\n    echo=\n    reg add \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\" /v ProxyEnable /t REG_DWORD /d 0 /f >nul 2>nul\n    reg add \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\" /v ProxyServer /d \"\" /f >nul 2>nul\n    :: 下方命令可选：关闭代理时是否清空例外列表（默认不清空，如需清空请取消注释）\n    :: reg add \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\" /v ProxyOverride /d \"\" /f >nul 2>nul\n    echo 系统代理已关闭\n    echo 请按任意键退出本窗口...\n)\n\npause >nul"
+        }
+      ]
+    },
+    {
+      "type": "horizontalRule"
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "id": "使用方法",
+        "data-toc-id": "使用方法",
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "使用方法"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "id": "1-修改配置",
+        "data-toc-id": "1-修改配置",
+        "level": 3
+      },
+      "content": [
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "1. 修改配置"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "用记事本打开 "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "code"
+            }
+          ],
+          "text": "toggle_proxy.bat"
+        },
+        {
+          "type": "text",
+          "text": "，找到这两行并修改为你的实际值："
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "batch"
+        }
+      ]
+    },
+    {
+      "type": "codeBlock",
+      "attrs": {
+        "language": "shell",
+        "highlightedHtml": null
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "set \"ProxyServerAddr=127.0.0.1:7890\"\nset \"excludeSites=localhost;127.0.0.1;<local>;*.example.com\""
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "id": "2-以管理员身份运行重要",
+        "data-toc-id": "2-以管理员身份运行重要",
+        "level": 3
+      },
+      "content": [
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "2. 以管理员身份运行（重要）"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "右键点击 "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "code"
+            }
+          ],
+          "text": "toggle_proxy.bat"
+        },
+        {
+          "type": "text",
+          "text": " → "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "以管理员身份运行"
+        },
+        {
+          "type": "text",
+          "text": "。"
+        }
+      ]
+    },
+    {
+      "type": "blockquote",
+      "content": [
+        {
+          "type": "paragraph",
+          "content": [
+            {
+              "type": "text",
+              "text": "因为脚本修改了 "
+            },
+            {
+              "type": "text",
+              "marks": [
+                {
+                  "type": "code"
+                }
+              ],
+              "text": "HKCU"
+            },
+            {
+              "type": "text",
+              "text": " 下的注册表，虽然属于当前用户配置，但某些安全策略仍要求管理员权限。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "id": "3-观察输出",
+        "data-toc-id": "3-观察输出",
+        "level": 3
+      },
+      "content": [
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "3. 观察输出"
+        }
+      ]
+    },
+    {
+      "type": "bulletList",
+      "content": [
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "若当前代理关闭 → 脚本会开启代理，并显示设置的代理地址和例外列表。"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "若当前代理开启 → 脚本会关闭代理。"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "id": "4-验证",
+        "data-toc-id": "4-验证",
+        "level": 3
+      },
+      "content": [
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "4. 验证"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "打开 "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Internet 选项"
+        },
+        {
+          "type": "text",
+          "text": " → "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "连接"
+        },
+        {
+          "type": "text",
+          "text": " → "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "局域网设置"
+        },
+        {
+          "type": "text",
+          "text": "，查看代理是否按预期修改。"
+        }
+      ]
+    },
+    {
+      "type": "horizontalRule"
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "id": "进阶自定义",
+        "data-toc-id": "进阶自定义",
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "进阶自定义"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "id": "1-关闭代理时同时清空例外列表",
+        "data-toc-id": "1-关闭代理时同时清空例外列表",
+        "level": 3
+      },
+      "content": [
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "1. 关闭代理时同时清空例外列表"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "找到脚本中 "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "code"
+            }
+          ],
+          "text": "else if %ProxyEnableValue% equ 1"
+        },
+        {
+          "type": "text",
+          "text": " 分支，取消注释下面这行："
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "batch"
+        }
+      ]
+    },
+    {
+      "type": "codeBlock",
+      "attrs": {
+        "language": "shell",
+        "highlightedHtml": null
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "reg add \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\" /v ProxyOverride /d \"\" /f >nul 2>nul"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "id": "2-添加多个代理地址不支持windows-原生只支持单一-http-代理",
+        "data-toc-id": "2-添加多个代理地址不支持windows-原生只支持单一-http-代理",
+        "level": 3
+      },
+      "content": [
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "2. 添加多个代理地址（不支持，Windows 原生只支持单一 HTTP 代理）"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "若需要 PAC 脚本或更复杂规则，建议修改 "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "code"
+            }
+          ],
+          "text": "ProxyServer"
+        },
+        {
+          "type": "text",
+          "text": " 为 PAC 文件路径，或使用第三方工具。"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "id": "3-静默运行不显示窗口",
+        "data-toc-id": "3-静默运行不显示窗口",
+        "level": 3
+      },
+      "content": [
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "3. 静默运行（不显示窗口）"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "可将脚本扩展名改为 "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "code"
+            }
+          ],
+          "text": ".vbs"
+        },
+        {
+          "type": "text",
+          "text": " 并调用，或使用 "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "code"
+            }
+          ],
+          "text": "start /min"
+        },
+        {
+          "type": "text",
+          "text": " 运行 bat，但会失去交互反馈。"
+        }
+      ]
+    },
+    {
+      "type": "horizontalRule"
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "id": "常见问题",
+        "data-toc-id": "常见问题",
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "常见问题"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "id": "q1运行后提示find-i-proxyenable不是内部或外部命令",
+        "data-toc-id": "q1运行后提示find-i-proxyenable不是内部或外部命令",
+        "level": 3
+      },
+      "content": [
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Q1：运行后提示“find /i “ProxyEnable””不是内部或外部命令？"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "A：请检查是否在 Windows 环境下运行，不要使用 Linux/Mac 的终端。确保 "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "code"
+            }
+          ],
+          "text": "find.exe"
+        },
+        {
+          "type": "text",
+          "text": " 存在于 "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "code"
+            }
+          ],
+          "text": "C:\\Windows\\System32"
+        },
+        {
+          "type": "text",
+          "text": "。"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "id": "q2代理开启成功但浏览器无法上网",
+        "data-toc-id": "q2代理开启成功但浏览器无法上网",
+        "level": 3
+      },
+      "content": [
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Q2：代理开启成功，但浏览器无法上网？"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "A："
+        }
+      ]
+    },
+    {
+      "type": "bulletList",
+      "content": [
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "确认代理客户端（如 Clash）正在运行且监听地址与 "
+                },
+                {
+                  "type": "text",
+                  "marks": [
+                    {
+                      "type": "code"
+                    }
+                  ],
+                  "text": "ProxyServerAddr"
+                },
+                {
+                  "type": "text",
+                  "text": " 一致。"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "检查例外列表中是否意外包含了目标网站（例如 "
+                },
+                {
+                  "type": "text",
+                  "marks": [
+                    {
+                      "type": "code"
+                    }
+                  ],
+                  "text": "*.google.com"
+                },
+                {
+                  "type": "text",
+                  "text": " 被排除）。"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "尝试清空 DNS 缓存："
+                },
+                {
+                  "type": "text",
+                  "marks": [
+                    {
+                      "type": "code"
+                    }
+                  ],
+                  "text": "ipconfig /flushdns"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "id": "q3排除网址中的-local-是什么",
+        "data-toc-id": "q3排除网址中的-local-是什么",
+        "level": 3
+      },
+      "content": [
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Q3：排除网址中的 "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "code"
+            }
+          ],
+          "text": "<local>"
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": " 是什么？"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "A：Windows 系统保留关键字，代表“所有绕过代理的 Intranet 地址”。通常包括 "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "code"
+            }
+          ],
+          "text": "localhost"
+        },
+        {
+          "type": "text",
+          "text": "、"
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "code"
+            }
+          ],
+          "text": "127.0.0.1"
+        },
+        {
+          "type": "text",
+          "text": " 以及 "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "code"
+            }
+          ],
+          "text": "file://"
+        },
+        {
+          "type": "text",
+          "text": " 等。"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "id": "q4修改注册表后需要重启应用吗",
+        "data-toc-id": "q4修改注册表后需要重启应用吗",
+        "level": 3
+      },
+      "content": [
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Q4：修改注册表后需要重启应用吗？"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "A：大多数程序（如 Chrome、Edge、系统 API）会监听注册表变化，"
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "立即生效"
+        },
+        {
+          "type": "text",
+          "text": "。部分老旧程序可能需要重启。"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "id": "q5如何查看当前代理设置而不运行脚本",
+        "data-toc-id": "q5如何查看当前代理设置而不运行脚本",
+        "level": 3
+      },
+      "content": [
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Q5：如何查看当前代理设置而不运行脚本？"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "A：命令行执行："
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "batch"
+        }
+      ]
+    },
+    {
+      "type": "codeBlock",
+      "attrs": {
+        "language": "shell",
+        "highlightedHtml": null
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "reg query \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\" /v ProxyEnable\nreg query \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\" /v ProxyServer\nreg query \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\" /v ProxyOverride"
+        }
+      ]
+    },
+    {
+      "type": "horizontalRule"
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "id": "总结",
+        "data-toc-id": "总结",
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "总结"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "通过这个简单的批处理脚本，你可以："
+        }
+      ]
+    },
+    {
+      "type": "bulletList",
+      "content": [
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "✅ 快速切换 Windows 系统代理状态"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "✅ 开启代理时自动配置服务器地址和例外列表"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "✅ 关闭代理时恢复干净网络环境"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "✅ 无需打开繁杂的 Internet 选项界面"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "将脚本放在桌面或任务栏，双击即可切换，极大提升工作效率。"
+        }
+      ]
+    },
+    {
+      "type": "horizontalRule"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "许可证"
+        },
+        {
+          "type": "text",
+          "text": "：本文脚本遵循 MIT 协议，可自由修改和分发。"
+        },
+        {
+          "type": "hardBreak"
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "反馈"
+        },
+        {
+          "type": "text",
+          "text": "：如有问题，欢迎在评论区留言讨论。"
+        }
+      ]
+    }
+  ]
+}

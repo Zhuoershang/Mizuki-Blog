@@ -1,7 +1,9 @@
 ---
 title: Draft Example
 published: 2022-07-01
-tags: [Markdown, Blogging, Demo]
+description: "This article is currently in a draft state and is not published."
+image: "./cover.png"
+tags: ["Markdown", "Blogging", "Demo"]
 category: Examples
 draft: true
 ---
