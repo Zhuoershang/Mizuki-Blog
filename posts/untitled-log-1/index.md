@@ -1,25 +1,15 @@
 ---
 title: "\U0001F31F 本周科技热闻纵览 \U0001F4F0第二期"
+published: 2026-03-16
+description: "本周科技领域热点纷呈，生成式AI持续引领风潮。从Google与NVIDIA的AI新工具发布，到DLSS 5引发的游戏圈热议，再到Xunce Technology对垂直数据的深度探讨，技术革新不断刷新我们的认知。本文将为您全面盘点本周最值得关注的科技动态，洞察AI如何重塑未来世界。"
+image: "./cover.png"
+tags: ["科技新闻", "人工智能", "AI工具", "DLSS", "Google", "NVIDIA", "XunceTechnology", "企业应用", "垂直数据", "生成式AI"]
+category: 科技
+draft: true
 slug: untitled-log-1
-summary: >-
-  本周科技领域热点纷呈，生成式AI持续引领风潮。从Google与NVIDIA的AI新工具发布，到DLSS 5引发的游戏圈热议，再到Xunce
-  Technology对垂直数据的深度探讨，技术革新不断刷新我们的认知。本文将为您全面盘点本周最值得关注的科技动态，洞察AI如何重塑未来世界。
-status: draft
-publishedAt: '2026-03-16T12:00:00.000Z'
 createdAt: '2026-03-18T12:25:16.000Z'
 updatedAt: '2026-03-22T07:48:17.000Z'
 readTimeInMinutes: 3
-tags:
-  - 科技新闻
-  - 人工智能
-  - AI工具
-  - DLSS
-  - Google
-  - NVIDIA
-  - XunceTechnology
-  - 企业应用
-  - 垂直数据
-  - 生成式AI
 ---
 # 🌟 本周科技热闻纵览 📰第二期
 

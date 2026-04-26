@@ -1,19 +1,15 @@
 ---
 title: 微X模块及其作者fkzhang的完整回顾与评价
+published: 2026-03-29
+description: "本文详细回顾了微X模块的完整生命周期，从起源、发展到终结的全过程，客观分析了开发者fkzhang的技术贡献与争议，并对这一曾经流行的微信增强工具有了全面的认识。"
+image: "./cover.png"
+tags: ["fkzhang", "Xposed", "开源项目", "微X模块", "微信增强"]
+category: 项目评价
+draft: false
 slug: weix-module-fkzhang-complete-review
-summary: >-
-  本文详细回顾了微X模块的完整生命周期，从起源、发展到终结的全过程，客观分析了开发者fkzhang的技术贡献与争议，并对这一曾经流行的微信增强工具有了全面的认识。
-status: published
-publishedAt: '2026-03-29T14:04:00.000Z'
 createdAt: '2026-03-29T14:03:24.000Z'
 updatedAt: '2026-04-06T06:24:26.000Z'
 readTimeInMinutes: 7
-tags:
-  - fkzhang
-  - Xposed
-  - 开源项目
-  - 微X模块
-  - 微信增强
 ---
 ![WX模块.jpg](./images/dc8e72b6-d967-4fcb-91b7-770b58ef2682.jpg)
 

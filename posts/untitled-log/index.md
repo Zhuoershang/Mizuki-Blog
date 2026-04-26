@@ -1,24 +1,15 @@
 ---
 title: 生成式AI浪潮下的科技新纪元：从工具爆发到行业重塑
+published: 2026-03-22
+description: "本文综述了近期生成式AI领域的重要进展，包括AI工具的快速迭代、游戏领域的AI渲染技术争议、以及垂直数据在提升AI推理效率中的作用。文章旨在探讨生成式AI如何重塑行业格局，并对其未来发展趋势进行展望。"
+image: "./cover.png"
+tags: ["科技新闻", "人工智能", "AI工具", "DLSS", "Google", "NVIDIA", "XunceTechnology", "企业应用", "垂直数据", "生成式AI"]
+category: 科技
+draft: false
 slug: untitled-log
-summary: >-
-  本文综述了近期生成式AI领域的重要进展，包括AI工具的快速迭代、游戏领域的AI渲染技术争议、以及垂直数据在提升AI推理效率中的作用。文章旨在探讨生成式AI如何重塑行业格局，并对其未来发展趋势进行展望。
-status: published
-publishedAt: '2026-03-22T15:41:42.000Z'
 createdAt: '2026-03-22T07:41:58.000Z'
 updatedAt: '2026-03-22T07:44:42.000Z'
 readTimeInMinutes: 3
-tags:
-  - 科技新闻
-  - 人工智能
-  - AI工具
-  - DLSS
-  - Google
-  - NVIDIA
-  - XunceTechnology
-  - 企业应用
-  - 垂直数据
-  - 生成式AI
 ---
 # 生成式AI浪潮下的科技新纪元：从工具爆发到行业重塑
 

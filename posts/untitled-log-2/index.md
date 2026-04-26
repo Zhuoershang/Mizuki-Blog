@@ -1,20 +1,15 @@
 ---
 title: Proxmox VE中Intel e1000e网卡硬件单元挂起问题终极解决方案
+published: 2026-03-29
+description: "本文详细介绍了Proxmox VE环境中Intel e1000e系列网卡（I218-LM、I219-V等）出现硬件单元挂起(Hardware Unit Hang)问题的完整解决方案。通过日志分析、问题定位、多种解决策略对比以及验证方法，帮助用户彻底解决网卡导致的系统崩溃问题。"
+image: "./cover.png"
+tags: ["e1000e", "Intel网卡", "ProxmoxVE", "硬件单元挂起", "网络故障排除"]
+category: 教程
+draft: false
 slug: untitled-log-2
-summary: >-
-  本文详细介绍了Proxmox VE环境中Intel e1000e系列网卡（I218-LM、I219-V等）出现硬件单元挂起(Hardware Unit
-  Hang)问题的完整解决方案。通过日志分析、问题定位、多种解决策略对比以及验证方法，帮助用户彻底解决网卡导致的系统崩溃问题。
-status: published
-publishedAt: '2026-03-29T13:57:38.000Z'
 createdAt: '2026-03-29T13:57:00.000Z'
 updatedAt: '2026-03-29T13:57:38.000Z'
 readTimeInMinutes: 1
-tags:
-  - e1000e
-  - Intel网卡
-  - ProxmoxVE
-  - 硬件单元挂起
-  - 网络故障排除
 ---
 # Proxmox VE中Intel e1000e网卡硬件单元挂起问题终极解决方案
 
